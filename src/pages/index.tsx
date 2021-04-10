@@ -38,6 +38,7 @@ export default function Home() {
   const userTotal = getDeckTotal(userCards);
   const dealerTotal = getDeckTotal(dealerCards);
 
+  // Preload all images on initial load
   useEffect(() => {
     preloadCardImages();
   }, []);
