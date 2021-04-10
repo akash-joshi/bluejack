@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import {
   getDeckTotal,
   getShuffledDeck,
+  preloadCardImages,
   sleep,
 } from "../components/utils/functions";
 
@@ -38,6 +39,10 @@ export default function Home() {
   const dealerTotal = getDeckTotal(dealerCards);
 
   useEffect(() => {
+    preloadCardImages();
+  }, []);
+
+  useEffect(() => {
     // Win condition for dealer
     if (userTotal > 21) {
       setGameState("dealer_won");
@@ -50,7 +55,6 @@ export default function Home() {
 
     // Set initial cards for user and dealer
     if (userTotal === 0 && dealerTotal === 0) {
-
       // I use spread operator everywhere because .pop() is a mutating function
       const intermediateDeck = [...remainingDeck];
 

@@ -1,3 +1,29 @@
+const suits = ["S", "D", "C", "H"];
+const cards = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K",
+];
+
+const deck: Deck = suits
+  .map((suit) =>
+    cards.map((value) => ({
+      suit,
+      value,
+    }))
+  )
+  .flat();
+
 export function getCardValue(cardValue: string): number {
   if (cardValue === "A") {
     return 1;
@@ -52,31 +78,6 @@ export function sleep(ms: number) {
 }
 
 export function getShuffledDeck(): Deck {
-  const suits = ["S", "D", "C", "H"];
-  const cards = [
-    "A",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "J",
-    "Q",
-    "K",
-  ];
-
-  const deck: Deck = suits
-    .map((suit) =>
-      cards.map((value) => ({
-        suit,
-        value,
-      }))
-    )
-    .flat();
   return shuffle(deck);
 }
 
@@ -99,4 +100,11 @@ export function shuffle<T>(array: Array<T>): Array<T> {
   }
 
   return array;
+}
+
+export function preloadCardImages() {
+  deck.map((card) => {
+    const img = new Image();
+    img.src = `/cards/${card.value}${card.suit}.svg`;
+  });
 }
